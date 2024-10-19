@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="Pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formularios</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e9ecef;
+            margin: 0;
+            padding: 20px;
+        }
+
+        form {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            margin: auto;
+            box-sizing: border-box;
+        }
+
+        h3 {
+            margin-top: 20px;
+            color: #333;
+            border-bottom: 2px solid #5cb85c;
+            padding-bottom: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="email"],
+        input[type="number"],
+        input[type="radio"],
+        input[type="checkbox"] {
+            margin-bottom: 15px;
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="password"]:focus,
+        input[type="email"]:focus,
+        input[type="number"]:focus {
+            border-color: #5cb85c;
+            outline: none;
+        }
+
+        input[type="submit"] {
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #4cae4c;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .checkbox-container label {
+            margin-bottom: 0;
+            margin-right: 10px;
+        }
+
+        .checkbox-container input[type="checkbox"] {
+            margin-bottom: 0;
+        }
+
+        .checkbox-container span {
+            font-size: 18px;
+            color: #666;
+        }
+        input[type="reset"] {
+            background-color: #f0ad4e; 
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        input[type="reset"]:hover {
+            background-color: #ec971f; 
+        }
+    </style>
+    <script>
+        function mostrarMensagem(event) {
+            event.preventDefault(); 
+            alert("Formulário enviado com sucesso!"); 
+            document.querySelector('form').reset();
+        }
+    
+        function limparMensagem(event) {
+            if (event.target.value === 'Nome' || event.target.value === 'Email') {
+                event.target.value = ''; 
+            }
+        }
+    
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('togglePassword').addEventListener('click', function() {
+                const passwordInput = document.getElementById('password');
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                this.textContent = type === 'password' ? '👁️' : '🙈'; 
+            });
+        });
+    </script>
+</head>
+<body>
+    <form onsubmit="mostrarMensagem(event)">
+        <label for="text">Seu nome:</label>
+        <input type="text" id="text" name="text" size="20" required value="Nome" onclick="limparMensagem(event)"><br><br>
+        
+        <label for="password">Senha de 8 digitos:</label>
+        <div style="position: relative;">
+            <input type="password" id="password" name="password" maxlength="8" size="8" required>
+            <span id="togglePassword" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">👁️</span>
+        </div>
+        
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email" required value="Email" onclick="limparMensagem(event)"><br><br>
+        
+        <label for="number">Qual sua idade?</label>
+        <input type="number" id="number" name="number" min="1" max="99" size="1" required onchange="this.style.color = (this.value >= 18) ? 'green' : 'red'"><br><br>
+        
+        <label for="telefone">Telefone:</label>
+        <input type="text" id="telefone" name="telefone" required placeholder="(XX) XXXXX-XXXX"><br><br>
+        
+        <label for="endereco">Endereço:</label>
+        <input type="text" id="endereco" name="endereco" required placeholder="Rua, Número, Bairro, Cidade"><br><br>
+        
+        <label for="pais">País:</label>
+        <select id="pais" name="pais" required>
+            <option value="">Selecione um país</option>
+            <option value="brasil">Brasil</option>
+            <option value="portugal">Portugal</option>
+            <option value="eua">Estados Unidos</option>
+            <option value="espanha">Espanha</option>
+        </select><br><br>
+        
+        
+        <label for="data_nascimento">Data de Nascimento:</label>
+        <input type="date" id="data_nascimento" name="data_nascimento" min="1900-01-01" required ><br><br>
+        
+        <input type="reset" value="Limpar">
+
+        <h3>Qual sua linguagem favorita?</h3>
+        <label for="radio1">Java Script:</label>
+        <input type="radio" id="radio1" name="radio" value="opcao1">
+        <br>
+        <label for="radio2">Java:</label>
+        <input type="radio" id="radio2" name="radio" value="opcao2">
+        <br>
+        <label for="radio3">C:</label>
+        <input type="radio" id="radio3" name="radio" value="opcao3">
+        <br>
+        <label for="radio4">C++:</label>
+        <input type="radio" id="radio4" name="radio" value="opcao4">
+        <br>
+        <label for="radio5">C#:</label>
+        <input type="radio" id="radio5" name="radio" value="opcao5">
+        <br>
+        <label for="radio6">Css:</label>
+        <input type="radio" id="radio6" name="radio" value="opcao6">
+        <br>
+        <label for="radio7">Html:</label>
+        <input type="radio" id="radio7" name="radio" value="opcao7">
+        <br>
+        <label for="radio8">Php:</label>
+        <input type="radio" id="radio8" name="radio" value="opcao8">
+        <br>
+        <label for="radio9">Python:</label>
+        <input type="radio" id="radio9" name="radio" value="opcao9">
+        <br>
+        <label for="radio10">Portugol:</label>
+        <input type="radio" id="radio10" name="radio" value="opcao10">
+        <br>
+        <label for="radio11">Lua:</label>
+        <input type="radio" id="radio11" name="radio" value="opcao11">
+        <br><br><br>
+
+        <h3>Quais esportes você gosta?</h3>
+        <label for="checkbox1">Futebol(Variantes):</label>
+        <input type="checkbox" id="checkbox1" name="checkbox1" value="opcao1">
+        <br>
+        <label for="checkbox2">Natação:</label>
+        <input type="checkbox" id="checkbox2" name="checkbox2" value="opcao2">
+        <br>
+        <label for="checkbox3">Volei:</label>
+        <input type="checkbox" id="checkbox3" name="checkbox3" value="op">
+        <br>
+        <label for="checkbox4">Basquete:</label>
+        <input type="checkbox" id="checkbox4" name="checkbox4" value="opcao4">
+        <br>
+        <label for="checkbox5">Tênis:</label>
+        <input type="checkbox" id="checkbox5" name="checkbox5" value="opcao5">
+        <br>
+        <label for="checkbox6">Handebol:</label>
+        <input type="checkbox" id="checkbox6" name="checkbox6" value="opcao6">
+        <br>
+        <label for="checkbox7">Rugby:</label>
+        <input type="checkbox" id="checkbox7" name="checkbox7" value="opcao7">
+        <br>
+        <label for="checkbox8">Ginástica:</label>
+        <input type="checkbox" id="checkbox8" name="checkbox8" value="opcao8">
+        <br>
+        <label for="checkbox9">Ciclismo:</label>
+        <input type="checkbox" id="checkbox9" name="checkbox9" value="opcao9">
+        <br>
+        <label for="checkbox10">Atletismo:</label>
+        <input type="checkbox" id="checkbox10" name="checkbox10" value="opcao10">
+        <br><br><br>
+
+        <label for="comentarios">Comentários:</label>
+        <textarea id="comentarios" name="comentarios" rows="4" placeholder="Deixe seus comentários aqui..."></textarea><br><br>
+        
+
+        <input type="submit" value="Enviar">
+    </form>
+</body>
+</html>
